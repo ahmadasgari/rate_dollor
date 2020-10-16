@@ -1,26 +1,25 @@
-# date_desired = input("Please insert date desired( for example : 1398-02-15): ")
+# date_desired = input("Please insert date desired( for example : 1398-02-15):")
+from data import url
+
+
 items = {"1": "sekkeh", "2": "usd_buy"}
-item_desired = input(
-    "for sekkeh number 1 \n"
-    "for doller number 2\n"
-    "Please insert date desired (1 or 2 ) : ")
 
 
-def input_varibale(v1):
-    def input_item(func):
-        def wrapper(*args, **kwargs):
-            a = func(*args, **kwargs)
-            url2 = f"{a}&item={v1}"
-            return url2
+def get_choice_item():
+    choice_item = input(
+        "for rate gold coin(sekkeh) number 1 \n"
+        "for rate dollor(USD) number 2\n"
+        "Please insert date desired (1 or 2 ) : ").strip()
 
-        return wrapper
+    if choice_item not in ('1', '2'):
+        return get_choice_item()
 
-    return input_item
+    return choice_item
 
 
-@input_varibale(items[item_desired])
-def make_url():
-    KEY_API = 'cY1y8nCipbHVl0m99VSrn3bWceXbsx1a'
-    url = f"http://api.navasan.tech/latest/?api_key={KEY_API}"
-    return url
+def make_url(item):
+    print(f'{url}&item={item}')
+    return f'{url}&item={item}'
 
+
+make_url(items[get_choice_item()])
