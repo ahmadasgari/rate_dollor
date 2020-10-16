@@ -3,14 +3,16 @@ import json
 from config import make_url, items, get_choice_item
 
 
-def get_api(address):
-    response = requests.get(address)
+def get_api(url):
+    response = requests.get(url)
     return json.loads(response.text)
 
 
-def show_rate(address, choice_item):
-    rate = get_api(address)
-    return rate[items[choice_item]]['value'], rate[items[choice_item]]['date']
+def show_rate(url, choice_item):
+    rate = get_api(url)
+    rate_value = rate[items[choice_item]]['value']
+    rate_date = rate[items[choice_item]]['date']
+    return rate_value, rate_date 
 
 
 def run():
